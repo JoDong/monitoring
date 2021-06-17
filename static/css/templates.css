@@ -1,0 +1,65 @@
+/* 공통 적용 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.btn {
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* header - nav */
+.navbar {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.nav-item {
+    font-size: 35px;
+}
+
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.collapse {
+    justify-content: space-between;
+}
+
+.navbar-nav {
+    align-items: center;
+}
+
+.navbar-nav i {
+    margin-left: 10px;
+    color: black;
+}
+
+/* 테이블 - table */
+.table {
+    text-align: center;
+    color: rgb(117, 117, 117);
+}
+
+/* 부제목 - Subheading */
+.sub-header {
+    text-align: center;
+}
+
+/* 수정 아이콘 */
+.change-icon {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    border-color: #e0e0e0;
+    outline: 0;
+}
+
+
+/* 수정 페이지 버튼 - <a> tag */
+.update-page a{
+    margin-left: 10px;
+}

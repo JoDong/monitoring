@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load bootstrap5 %}
+
+{% block contents %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <h1 class="sub-header">Url 생성</h1>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <form action="{% url 'domain:create' %}" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button type="submit" class="btn btn-primary">생성</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
