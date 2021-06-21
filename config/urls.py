@@ -16,8 +16,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-import domain.views
 
+import core
+import domain.views
+from core.views import ping
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +27,5 @@ urlpatterns = [
     path('detail/<int:pk>', domain.views.detail, name='detail'),
     path('accounts/', include('users.urls')),
     path('domain/', include('domain.urls')),
+    path('ping/', ping, name='ping'),
 ]

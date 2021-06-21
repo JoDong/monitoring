@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block contents %}
-
+{% load static %}
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -67,4 +67,10 @@
             </nav>
         </div>
     </div>
+
+
+    <figure class="highcharts-figure">
+    <div id="container"></div>
+    </figure>
+    <script  src="{% static "/js/highcharts.js"%}"></script>
 {% endblock %}

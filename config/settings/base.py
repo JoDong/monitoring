@@ -45,6 +45,8 @@ THIRD_PARTY_APPS = [
     'bootstrap5',
     'django_apscheduler',
     'django_seed',
+    'django_celery_beat',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -122,12 +124,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 # 로그인 설정
-LOGIN_URL = 'accounts/login/'
+# LOGIN_URL = 'accounts/login/'
 LOGOUT_REDIRECT_URL = 'accounts/login/'
 
 
-# # Scheduler 설정
-APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
 
-SCHEDULER_DEFAULT = True
-
+# Celery
+CELERY_ALWAYS_EAGER = True
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ENABLE_UTC = False
+# https://docs.celeryproject.org/en/stable/
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_BROKER_BACKEND = 'redis://127.0.0.1:6379'
+# CELERY_CACHE_BACKEND = 'db+sqlite:///celery.sqlite3'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_RESULT_BACKEND = 'django-db'  # 'redis://127.0.0.1:6379'
+CELERY_TIMEZONE = 'Asia/Seoul'
+# CELERY_TASK_TRACK_STARTED = True
+# CELERY_TASK_TIME_LIMIT = 30 * 60

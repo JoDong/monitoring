@@ -5,7 +5,7 @@ from statuslog.models import StatusLog
 
 
 class StatusAdmin(admin.ModelAdmin):
-    list_display = ['url', 'status', 'process']
+    list_display = ['pk', 'url', 'status', 'process']
 
 
 admin.site.register(StatusLog, StatusAdmin)

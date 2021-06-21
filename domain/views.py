@@ -4,34 +4,34 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from domain.forms import UrlForm
 from domain.models import UrlModel
-
-# 메인 페이지 (조회) - 조회
 from statuslog.models import StatusLog
 
 
+# 메인 페이지 (조회) - 조회
 @login_required
 def home(request):
     all_urls = UrlModel.objects.all().order_by('-created_at')
+    status_log = StatusLog.objects.all().order_by('-created_at')
     page = int(request.GET.get('p', 1))
     paginator = Paginator(all_urls, 5)
     urls = paginator.get_page(page)
-    return render(request, 'domain/home.html', {'urls': urls})
+    return render(request, 'domain/home.html', {'urls': urls, 'status_log': status_log})
 
 
 # 디테일 페이지
-# @login_required
+@login_required
 def detail(request, pk):
     urls = get_object_or_404(UrlModel, pk=pk)
     all_status_log = StatusLog.objects.filter(url=urls.pk).order_by('-created_at')
     page = int(request.GET.get('p', 1))
-    paginator = Paginator(all_status_log, 5)
+    paginator = Paginator(all_status_log, 30)
     status_log = paginator.get_page(page)
 
     return render(request, 'domain/detail.html', {'urls': urls, 'status_log': status_log})
 
 
 # 생성
-# @login_required
+@login_required
 def url_create(request):
     if request.method == 'POST':
         form = UrlForm(request.POST)
@@ -48,7 +48,7 @@ def url_create(request):
 
 
 # 수정
-# @login_required
+@login_required
 def url_update(request, pk):
     url = get_object_or_404(UrlModel, pk=pk)
     if request.method == 'POST':
@@ -65,8 +65,13 @@ def url_update(request, pk):
 
 
 # 삭제
-# @login_required
+@login_required
 def url_delete(request, pk):
     url = get_object_or_404(UrlModel, pk=pk)
     url.delete()
     return redirect('home')
+
+
+#  chart
+def url_charts(request, pk):
+    pass
